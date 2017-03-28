@@ -12,15 +12,11 @@ namespace MatchingGame
 {
     public partial class Form1 : Form
     {
-        
         Label firstClicked = null;
-
-        
         Label secondClicked = null;
 
         Random random = new Random();
-
-            List<string> icons = new List<string>()
+        List<string> icons = new List<string>()
         {
             "!", "!", "N", "N", ",", ",", "k", "k",
             "b", "b", "v", "v", "w", "w", "z", "z"
@@ -29,14 +25,11 @@ namespace MatchingGame
         public Form1()
         {
             InitializeComponent();
-
             AssignIconsToSquares();
-            
-
         }
+
         private void AssignIconsToSquares()
         {
-         
             foreach (Control control in tableLayoutPanel1.Controls)
             {
                 Label iconLabel = control as Label;
@@ -44,7 +37,7 @@ namespace MatchingGame
                 {
                     int randomNumber = random.Next(icons.Count);
                     iconLabel.Text = icons[randomNumber];
-              
+
                     icons.RemoveAt(randomNumber);
                 }
             }
@@ -52,14 +45,14 @@ namespace MatchingGame
 
         private void label_Click(object sender, EventArgs e)
         {
-           
+
             if (timer1.Enabled == true)
                 return;
             Label clickedLabel = sender as Label;
 
             if (clickedLabel != null)
             {
-            
+
                 if (clickedLabel.ForeColor == Color.Black)
                     return;
 
@@ -70,7 +63,7 @@ namespace MatchingGame
 
                     return;
                 }
-             
+
                 secondClicked = clickedLabel;
                 secondClicked.ForeColor = Color.Black;
 
@@ -84,7 +77,7 @@ namespace MatchingGame
                     secondClicked = null;
                     return;
                 }
-             
+
                 timer1.Start();
 
             }
@@ -93,7 +86,6 @@ namespace MatchingGame
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
-
 
             firstClicked.ForeColor = firstClicked.BackColor;
             secondClicked.ForeColor = secondClicked.BackColor;
@@ -104,7 +96,6 @@ namespace MatchingGame
 
         private void CheckForWinner()
         {
-
             foreach (Control control in tableLayoutPanel1.Controls)
             {
                 Label iconLabel = control as Label;
@@ -115,11 +106,9 @@ namespace MatchingGame
                         return;
                 }
             }
-
-       
             MessageBox.Show("You matched all the icons!", "Congratulations");
             Close();
         }
     }
-    }
-    
+}
+
